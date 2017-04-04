@@ -45,24 +45,15 @@ int main() {
 int getStr()
     {
     char ss[10001];
-    str *node, *temp;
-    node = (str *) malloc(sizeof(str));
+    str **node = &head;
     scanf("\n%[^\n]s", ss);
 
-    if(head == NULL)
-        {
-        head = node;
-        strcpy(node ->s, ss);
-        node -> next = NULL;
-    }
-    else
-        {
-        temp = head;
-        while(temp -> next != NULL)
-            temp = temp -> next;
-        temp -> next = node;
-        strcpy(node ->s, ss);
-        node -> next = NULL;
-    }
+    while(*node)
+        node = &((*node) -> next);
+
+    (*node) = (str *) malloc(sizeof(str));
+    (*node) -> next = NULL;
+    strcpy((*node) -> s, ss);
+
     return 0;
 }
